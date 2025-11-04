@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import AddNoteModal from "../../components/AddNoteModal";
 import NoteList from "../../components/NoteList";
-import AddNoteModal from "./AddNoteModal";
 
 const NoteScreen = () => {
   const [notes, setNotes] = useState([
@@ -12,17 +12,6 @@ const NoteScreen = () => {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [newNote, setNewNote] = useState("");
-
-  const addNewNote = () => {
-    if (newNote.trim() === "") return;
-
-    setNotes((prevNotes) => [
-      ...prevNotes,
-      { id: Date.now().toString(), text: newNote },
-    ]);
-    setNewNote("");
-    setModalVisible(false);
-  };
 
   return (
     <View style={styles.container}>
@@ -36,10 +25,10 @@ const NoteScreen = () => {
 
       <AddNoteModal
         modalVisible={modalVisible}
-        setModalVisible={setModalVisible}
         newNote={newNote}
         setNewNote={setNewNote}
-        addNewNote={addNewNote}
+        setNotes={setNotes}
+        setModalVisible={setModalVisible}
       />
     </View>
   );
